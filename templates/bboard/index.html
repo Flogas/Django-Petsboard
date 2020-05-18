@@ -1,0 +1,20 @@
+{%  extends "layout/basic.html" %}
+
+{% block content %}
+{% for bb in bbs %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="product-card col-xs-12 col-sm-6 col-md-9 col-lg-0">
+        <h2>{{ bb.title }}</h2>
+        <img src="{{ bb.image.url}}" width='520' height='420' >
+    <p>{{ bb.content }}</p>
+   {% comment %}don't worked <p><a href="{% url 'by_rubric' bb.rubric.pk %}">
+        {{ bb.content.name }}</a> </p>{% endcomment %}
+    <p>{{ bb.published|date:"d.m.Y H:i:s" }} Контактный номер: {{ bb.phone }} </p>
+    </div>
+  </div>
+</div>
+
+
+{% endfor %}
+{% endblock %}
