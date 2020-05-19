@@ -119,11 +119,12 @@ input {
 .product-card {
   position: absolute;
   left: 300px;
-  bottom: 250px;
+  bottom: 370px;
   margin: 10 px;
   padding: 20px;
 }
 .product-card p {
+width: 520px;
 word-wrap: break-word;
 }
 footer a {
