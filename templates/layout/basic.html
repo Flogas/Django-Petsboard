@@ -24,12 +24,19 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a href="#" class="nav-link">Вход и регистрация</a>
+						<a href="{% url 'register' %}" class="nav-link">Регистрация</a>
+					</li>
+                    <li class="nav-item">
+						<a href="{% url 'login' %}" class="nav-link">Вход</a>
 					</li>
 					<li class="nav-item active">
 						<a href="{% url 'add' %}" class="nav-link">Подать объявление</a>
 					</li>
 				</ul>
+                <ul class="adf">
+                        <p>Вы авторизованы как: {{ user.username }}</p>
+                        <a href="{% url 'exit'%}"> выйти из аккаунта </a>
+                </ul>
 			</div>
 		</div>
 	</nav>
@@ -77,10 +84,11 @@
     <div class="row text-center text-md-left mt-3 pb-3">
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
-        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-          consectetur
-          adipisicing elit.</p>
+        <h6 class="text-uppercase mb-4 font-weight-bold">Название нашей команды: "Заря"</h6>
+        <p>Наш проект помощи приютам для животных был
+создан для распространения информации о "братьях наших меньших", которые попали в трудную ситуацию и оказались на улице.
+            Мы занимаемся распространением информации о животных, находящихся в приютах или на передержке у людей.
+            </p>
       </div>
       <!-- Grid column -->
       <hr class="w-100 clearfix d-md-none">

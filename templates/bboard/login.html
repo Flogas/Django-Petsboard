@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Вход - Доска объявлений</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bboard/login.css' %}">
+  </head>
+  <body>
+  <input checked="" id="signin" name="action" type="radio" value="signin">
+  <input id="signup" name="action" type="radio" value="signup">
+  <div id="wrapper">
+  </div>
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+      {{ form.as_p }}
+      <button type="submit">Войти</button>
+    </form>
+  </body>
+</html>

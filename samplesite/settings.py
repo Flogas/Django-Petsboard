@@ -19,14 +19,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3-h+vf5kg$@@y&yv&#*#y(z066rs8wwk6h^e&6a6#%kkx0v1=z'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '3-h+vf5kg$@@y&yv&#*#y(z066rs8wwk6h^e&6a6#%kkx0v1=z')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = [
-    '192.168.0.6',
-    '127.0.0.1',
+    "*"
 ]
 
 
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bboard.apps.BboardConfig',#добавил приложение bboard(сначала его создал ./manage.py startapp bboard)
+    'bboard.apps.BboardConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

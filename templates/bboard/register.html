@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Регистрация - Доска объявлений</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bboard/register.css' %}">
+</head>
+<body>
+<input checked="" id="signin" name="action" type="radio" value="signin">
+  <input id="signup" name="action" type="radio" value="signup">
+  <div id="wrapper">
+  </div>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+   <!-- <input type="submit" value="Зарегистрировать"> -->
+    <button type="submit">Зарегистрироваться</button>
+</form>
+</body>
+</html>
