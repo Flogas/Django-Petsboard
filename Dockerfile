@@ -2,8 +2,9 @@ FROM django
 
 EXPOSE 8000
 
-ADD Django-Petsboard
-WORKDIR Django-Petsboard
+WORKDIR /Django-Petsboard
+COPY . /Django-Petsboard
+
 
 RUN pip install -r requirements.txt
 
