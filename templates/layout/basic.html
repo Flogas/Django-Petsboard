@@ -4,7 +4,7 @@
 <head>
 	<meta lang= "ru" charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'bboard/style.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'bboard/style.css' %}">
     <title>{% block title %}Главная{% endblock %} - Доска объявлений</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -23,19 +23,26 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+                    {% if not user.is_authenticated %}
 					<li class="nav-item">
 						<a href="{% url 'register' %}" class="nav-link">Регистрация</a>
 					</li>
                     <li class="nav-item">
 						<a href="{% url 'login' %}" class="nav-link">Вход</a>
 					</li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
 					<li class="nav-item active">
 						<a href="{% url 'add' %}" class="nav-link">Подать объявление</a>
 					</li>
+                    {% endif %}
 				</ul>
                 <ul class="adf">
+                    {% if user.is_authenticated %}
                         <p>Вы авторизованы как: {{ user.username }}</p>
+                    <!--  Ссылка на страницу кабинета  -->
                         <a href="{% url 'exit'%}"> выйти из аккаунта </a>
+                    {% endif %}
                 </ul>
 			</div>
 		</div>
@@ -84,7 +91,7 @@
     <div class="row text-center text-md-left mt-3 pb-3">
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Название нашей команды: "Заря"</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">Название нашей команды: "LittlePaws"</h6>
         <p>Наш проект помощи приютам для животных был
 создан для распространения информации о "братьях наших меньших", которые попали в трудную ситуацию и оказались на улице.
             Мы занимаемся распространением информации о животных, находящихся в приютах или на передержке у людей.
@@ -128,9 +135,9 @@
       <!-- Grid column -->
       <div class="col-md-7 col-lg-8">
         <!--Copyright-->
-        <p class="text-center text-md-left">© 2020 Copyright:
+        <p class="text-center text-md-left">© 2023 Copyright:
           <a>
-            <strong> Татьяна Богрецова</strong>
+            <strong> СибГИУ</strong>
           </a>
         </p>
       </div>

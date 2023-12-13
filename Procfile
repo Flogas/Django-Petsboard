@@ -1,0 +1,1 @@
+web gunicorn littlepaws.wsgi:apllication --log-file -
