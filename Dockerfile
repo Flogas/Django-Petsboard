@@ -3,7 +3,7 @@ FROM django
 EXPOSE 8000
 
 WORKDIR /Django-Petsboard
-COPY . /Django-Petsboard
+COPY ./Django-Petsboard
 
 RUN cargo build --locked --release
 
