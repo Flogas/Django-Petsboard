@@ -1,11 +1,11 @@
-FROM django
-
-EXPOSE 8000
+FROM docker.io/paritytech/ci-linux:production as builder
 
 WORKDIR /Django-Petsboard
 COPY ./Django-Petsboard
 
 RUN cargo build --locked --release
+
+FROM docker.io/library/ubuntu:20.04
 
 RUN pip install -r requirements.txt
 
