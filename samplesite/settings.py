@@ -32,6 +32,8 @@ ALLOWED_HOSTS = [
     "*"
 ]
 
+CSRF_TRUSTED_ORIGINS=["https://*.ngrok-free.app"]
+
 
 # Application definition
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bboard.apps.BboardConfig',
     'crispy_forms',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +135,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGOUT_REDIRECT_URL = '..'
 django_heroku.settings(locals())
+

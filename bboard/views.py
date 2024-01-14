@@ -15,6 +15,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.views.generic.detail import DetailView
 
 
 def index(request):
@@ -82,4 +84,8 @@ class LoginFormView(FormView):
         # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
+
+@login_required
+def profile(request):
+    return render(request, 'bboard/profile.html')
 
