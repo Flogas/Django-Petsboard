@@ -9,7 +9,7 @@
     <p>{{ bb.content }}</p>
    {% comment %}don't worked <p><a href="{% url 'by_rubric' bb.rubric.pk %}">
         {{ bb.content.name }}</a> </p>{% endcomment %}
-    <p>{{ bb.published|date:"d.m.Y H:i:s" }} Контактный номер: {{ bb.phone }} </p>
+    <p>{{ bb.published|date:"d.m.Y H:i" }} Контактный номер: {{ bb.phone }} {{bb.owner_user.username}} </p>
     </div>
   </div>
 </div>

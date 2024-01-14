@@ -4,14 +4,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Bb ( models.Model):
+class Bb (models.Model):
     title = models.CharField(max_length=50, verbose_name='Наименование')
     content = models.TextField(null=True, blank=True, verbose_name='Описание')
     price = models.FloatField(null=True, blank=True, verbose_name='Цена')
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
     phone = models.CharField(max_length=12, verbose_name='Контактный номер')
-    image = models.ImageField(upload_to='images/', verbose_name='Изображение')
+    image = models.ImageField(upload_to='images', verbose_name='Изображение', default='default.jpg')
+    owner_user = models.ForeignKey(User,on_delete=models.PROTECT,verbose_name='Владелец', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Объявления'

@@ -9,6 +9,7 @@ class BbForm(ModelForm):
         model = Bb
         fields = ('title', 'content', 'price', 'rubric', 'phone', 'image')
 
+
 class MyForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
     class Meta:

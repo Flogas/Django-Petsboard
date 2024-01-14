@@ -44,6 +44,12 @@ class BbCreateView(CreateView):
         context['rubrics'] = Rubric.objects.all()
         return context
 
+    def form_valid(self, form):
+        bb = form.save(commit=False)
+        bb.owner_user = self.request.user
+        bb.save()
+        return super(BbCreateView, self).form_valid(form)
+
 
 # Вариант регистрации на базе класса FormView
 class MyRegisterFormView(FormView):
@@ -85,7 +91,7 @@ class LoginFormView(FormView):
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
 
+
 @login_required
 def profile(request):
     return render(request, 'bboard/profile.html')
-
