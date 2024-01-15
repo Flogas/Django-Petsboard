@@ -1,11 +1,56 @@
-{%  extends "layout/basic.html" %}
+{% load static %}
+<html>
+<head>
+	<meta lang= "ru" charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'bboard/style.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+	<!-- Шапка сайта -->
+	<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+		<div class="container-fluid">
+			<a href="{% url 'index' %}" class="navbar-brad"><img src="{% static 'bboard/wolf.png' %}"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+                    {% if not user.is_authenticated %}
+					<li class="nav-item">
+						<a href="{% url 'register' %}" class="nav-link">Регистрация</a>
+					</li>
+                    <li class="nav-item">
+						<a href="{% url 'login' %}" class="nav-link">Вход</a>
+					</li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+					<li class="nav-item active">
+						<a href="{% url 'add' %}" class="nav-link">Подать объявление</a>
+					</li>
+					<li class="nav-item active">
+						<a href="{% url 'users-profile' %}" class="nav-link">Личный кабинет </a>
+					</li>
+                    {% endif %}
+				</ul>
+                <ul class="adf">
+                    {% if user.is_authenticated %}
+                        <p>Вы авторизованы как: {{ user.username }}</p>
+                    <!--  Ссылка на страницу кабинета  -->
+                        <a href="{% url 'exit'%}"> выйти из аккаунта </a>
+                    {% endif %}
+                </ul>
+			</div>
+		</div>
+	</nav>
+
 {% block content %}
-    <div>
-        <a href="{% url 'index' %}">Главная</a>
-        {%  for rubric in rubrics %}
-        <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>
-        {% endfor %}
-    </div>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,3 +58,61 @@
 </form>
 
 {% endblock %}
+
+
+	<!-- Подвал -->
+<footer class="page-footer font-small mdb-color pt-4">
+    <div class="fixed-bottom">
+  <div class="container text-center text-md-left">
+    <hr>
+    <!-- Grid row -->
+    <div class="row d-flex align-items-center">
+      <!-- Grid column -->
+      <div class="col-md-7 col-lg-8">
+        <!--Copyright-->
+        <p class="text-center text-md-left">© 2023 Copyright:
+          <a>
+            <strong> СибГИУ</strong>
+          </a>
+        </p>
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-5 col-lg-4 ml-lg-0">
+        <!-- Social buttons -->
+        <div class="text-center text-md-right">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
+                <i class="fab fa-vk"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+  </div>
+        </div>
+  <!-- Footer Links -->
+</footer>
+<!-- Подвал -->
+
+</body>
+</html>
