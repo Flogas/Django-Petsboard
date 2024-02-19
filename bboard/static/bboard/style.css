@@ -5,7 +5,9 @@ body,html {
   font-family: 'Poppins', sans-serif;
   color: #222;
 }
-
+.navbar-collapse {
+    justify-content: right;
+}
 .navbar-brad img {width: 150px}
 .navbar-nav li {
   padding-right: 20px;
@@ -137,4 +139,88 @@ color: #000 !important;
    bottom:0px;
    height:30px;
    width:100%;
+}
+
+
+
+
+
+
+
+.section {
+  padding: 50px 0;
+}
+
+.flex-row-stretch {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.flex-col {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1337px) {
+.flex-col {
+    width: 100%;
+    margin-bottom: 15px;
+}
+}
+
+
+/* ======Cards======= */
+
+.card {
+    position: relative;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: left;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+.card-label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+    background-color: #231f20;
+    padding: 7px 15px;
+}
+
+.card-photo {
+  background-position: 50% 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 400px;
+}
+
+.card p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.card h4 {
+    text-align: left !important;
+    margin: 0 0 13px;
+}
+
+.card a {
+    align-self: end;
+    margin-top: auto;
 }

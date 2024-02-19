@@ -25,18 +25,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '3-h+vf5kg$@@y&yv&#*#y(z066rs8wwk6h^e&6a6#%kkx0v1=z')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+# DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = [
     "*"
 ]
 
-CSRF_TRUSTED_ORIGINS=["https://*.ngrok-free.app"]
-
+CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app"]
 
 # Application definition
-DEFAULT_AUTO_FIELD= 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -82,16 +81,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'samplesite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+#
+# }
+DATABASES = {"default":
+                 {"ENGINE": "django.db.backends.mysql",
+                  "NAME": "sibsiu_pets_board",
+                  "USER": "root",
+                  "PASSWORD": "root",
+                  "HOST": "localhost",
+                  "PORT": "3306", }
+             }
 
 
 # Password validation
@@ -111,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -135,4 +141,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGOUT_REDIRECT_URL = '..'
 django_heroku.settings(locals())
-
