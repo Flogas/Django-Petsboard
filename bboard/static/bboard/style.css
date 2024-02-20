@@ -203,6 +203,11 @@ color: #000 !important;
     padding: 7px 15px;
 }
 
+.card-name {
+    font-size: 24px;
+    margin-bottom: 26px;
+}
+
 .card-photo {
   background-position: 50% 50%;
   background-size: contain;
