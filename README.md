@@ -15,4 +15,4 @@ sqlparse==0.4.4
 typing_extensions==4.8.0
 tzdata==2023.3
 whitenoise==6.6.0
-
+fontawesomefree==6.5.1
