@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
     'crispy_forms',
     'bootstrap3',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
