@@ -1,3 +1,5 @@
+@import "../node_modules/bootstrap/scss/functions";
+
 html,
 body {
     height: 100%;
@@ -30,19 +32,22 @@ main.main {
 
 .header-top {
     padding:30px
-
 }
-
 ul.btn-group{
     list-style:none;
+
 }
 ul.btn-group li{
     margin-right:40px;
-    padding-bottom:20px
+    padding-bottom:20px;
 }
 ul.btn-group a {
     text-decoration: none;
-    color: inherit;
+    color: #198754;
+}
+ul.btn-group a:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 ul.header-navbar {
     list-style:none;
@@ -56,8 +61,29 @@ ul.header-navbar a {
     color: inherit;
 }
 
-
-
-
-
 /* ========================================General rules======================================== */
+
+.main_info_page {
+    margin-top: 46px;
+}
+.rubric_title {
+    font-size: 18px;
+    font-weight: bold;
+}
+#main_info{
+    margin-top: 49px;
+}
+.card-img-top {
+  display: block;
+  width: 241px;
+  height: 241px;
+  object-fit: fill;
+  margin: 0 auto;
+}
+
+.carousel-inner img {
+    object-fit: cover;
+    vertical-align: middle;
+    border-style: none;
+    height: 485px;
+}
