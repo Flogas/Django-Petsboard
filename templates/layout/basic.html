@@ -1,202 +1,262 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-	<meta lang= "ru" charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta lang="ru" charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'bboard/style.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <title>{% block title %}Главная{% endblock %} - Доска объявлений</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
-	<!-- Шапка сайта -->
-	<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
-		<div class="container-fluid">
-			<a href="{% url 'index' %}" class="navbar-brad"><img src="{% static 'bboard/wolf.png' %}"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-                    {% if not user.is_authenticated %}
-					<li class="nav-item">
-						<a href="{% url 'register' %}" class="nav-link">Регистрация</a>
-					</li>
-                    <li class="nav-item">
-						<a href="{% url 'login' %}" class="nav-link">Вход</a>
-					</li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-					<li class="nav-item active">
-						<a href="{% url 'add' %}" class="nav-link">Подать объявление</a>
-					</li>
-					<li class="nav-item active">
-						<a href="{% url 'users-profile' %}" class="nav-link">Личный кабинет </a>
-					</li>
-                    {% endif %}
-				</ul>
-                <ul class="adf">
-                    {% if user.is_authenticated %}
-                        <p>Вы авторизованы как: {{ user.username }}</p>
-                    <!--  Ссылка на страницу кабинета  -->
-                        <a href="{% url 'exit'%}"> выйти из аккаунта </a>
-                    {% endif %}
-                </ul>
-			</div>
-		</div>
-	</nav>
-	<!-- поисковая строка -->
-	<div class="search">
-		<div class="container-fluid">
-			<div class="row jumbotron">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<form class="search">
-					  <input type="text" placeholder="Искать здесь...">
-					  <button type="submit"></button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<!-- Блок категорий-->
-<div class="sticky-block">
-	<div class="container-fluid">
-		<div class="row text-center padding">
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<div class="category-wrap">
-				  <h3>Категории</h3>
-				  <ul>
-					  {% for rubric in rubrics %}
-				    <li><a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a></li>
-					  {%  endfor %}
-				  </ul>
-				</div>
-			</div>
-		</div>
+<!-- Панель навигации -->
+<section>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-top">
+                <div class="container-xxl">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="container-fluid">
+                                <a href="{% url 'index' %}" class="navbar-brad"><img
+                                        src="{% static 'bboard/logo.svg' %}"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="header-navbar d-flex justify-content-end">
+                                <li class="nav-item"><a href="{% url 'index' %}"> Главная </a></li>
+                                <li class="nav-item"><a href="#"> Ищут дом </a></li>
+                                <li class="nav-item"><a href="#"> О нас </a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                <ul class="btn-group">
+                                    {% if not user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <button type="button" class="btn btn-outline-success btn-sm"><a
+                                                href="{% url 'register' %}" class="nav-link"> Зарегистрироваться </a>
+                                        </button>
+                                    </li>
+                                    <li class="btn-group-login">
+                                        <button type="button" class="btn btn-outline-success btn-sm"><a
+                                                href="{% url 'login' %}" class="nav-link"><i
+                                                class="fa-solid fa-right-to-bracket"></i> Войти</a></button>
+                                    </li>
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    <li class="nav-item active"><a href="{% url 'users-profile' %}" class="nav-link">Личный
+                                        кабинет </a></li>
+                                    <li class="btn-group-add">
+                                        <button type="button" class="btn btn-outline-success btn-sm"><a
+                                                href="{% url 'add' %}" class="nav-link">Разместить объявление</a>
+                                        </button>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                                <ul class="adf">
+                                    {% if user.is_authenticated %}
+                                    <p>Вы авторизованы как: {{ user.username }}</p>
+                                    <!--  Ссылка на страницу кабинета  -->
+                                    <a href="{% url 'exit'%}"> выйти из аккаунта </a>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </header>
     </div>
-</div>
+</section>
+<!-- Баннер -->
 
-<div class="section">
-    <div class="container">
-        <div class="row flex-row-stretch">
-             {% block content %}
-             {% endblock %}
+<section id="main_banner">
+    <div class="container-xxl">
+        <div class="col-lg-12 d-lg-flex justify-content-center">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'bboard/Main_Banner.png' %}" class="d-block " alt="...">
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="{% static 'bboard/Main_Banner.png' %}" class="d-block " alt="...">
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="{% static 'bboard/Main_Banner.png' %}" class="d-block " alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+    </div>
+</section>
 
 
+<!-- Блок категорий-->
+<section id="main_info">
+    <div class="container-xxl">
+        <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                    <div class="container-fluid" style="background-color:#FBFBFB">
+                        <h3 class="rubric_title"> Категории </h3>
+                        <ul class="list-group list-group-flush">
+                            {% for rubric in rubrics %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color:#FBFBFB">
+                                <a href="{% url 'by_rubric' rubric.pk %}"
+                                   style="text-decoration: none; color: #3D3D3D;">{{ rubric.name }}</a>
+                                <span class="badge bg-success rounded-pill">1</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            <div class="col-xl-10">
+                <div class="row">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-
-
-
-
-
-
-	<!-- Подвал -->
+<!-- Подвал -->
 <footer class="page-footer font-small mdb-color pt-4">
-   <!-- Footer Links -->
-  <div class="container text-center text-md-left">
-    <!-- Footer links -->
-    <div class="row text-center text-md-left mt-3 pb-3">
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Название нашей команды: "LittlePaws"</h6>
-        <p>Наш проект помощи приютам для животных был
-создан для распространения информации о "братьях наших меньших", которые попали в трудную ситуацию и оказались на улице.
-            Мы занимаемся распространением информации о животных, находящихся в приютах или на передержке у людей.
-            </p>
-      </div>
-      <!-- Grid column -->
-      <hr class="w-100 clearfix d-md-none">
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+        <!-- Footer links -->
+        <div class="row text-center text-md-left mt-3 pb-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Название нашей команды: "LittlePaws"</h6>
+                <p>Наш проект помощи приютам для животных был
+                    создан для распространения информации о "братьях наших меньших", которые попали в трудную
+                    ситуацию и оказались на улице.
+                    Мы занимаемся распространением информации о животных, находящихся в приютах или на передержке у
+                    людей.
+                </p>
+            </div>
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none">
 
-      <hr class="w-100 clearfix d-md-none">
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Полезные ссылки</h6>
-        <p>
-          <a href="#!">Помощь приютам г.Новокузнецка</a>
-        </p>
-        <p>
-          <a href="https://vk.com/nvkzcotpes">НГОО ОЗБЖ "Кот и Пес", г. Новокузнецк</a>
-        </p>
-        <p>
-          <a href="https://vk.com/club156658408">Приют "Шанс на жизнь"</a>
-        </p>
-      </div>
-      <!-- Grid column -->
-      <hr class="w-100 clearfix d-md-none">
-      <!-- Grid column -->
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Контакты</h6>
-        <p>
-          <i class="fas fa-home mr-3"></i> Новокузнецк, Кемеровская область - Кузбасс, 654084, Россия</p>
-        <p>
-          <i class="fas fa-envelope mr-3"></i> mercyboxx@gmail.com</p>
-        <p>
-          <i class="fas fa-phone mr-3"></i> + 7 908 942 56 17</p>
-      </div>
-      <!-- Grid column -->
-    </div>
-    <!-- Footer links -->
-    <hr>
-    <!-- Grid row -->
-    <div class="row d-flex align-items-center">
-      <!-- Grid column -->
-      <div class="col-md-7 col-lg-8">
-        <!--Copyright-->
-        <p class="text-center text-md-left">© 2023 Copyright:
-          <a>
-            <strong> СибГИУ</strong>
-          </a>
-        </p>
-      </div>
-      <!-- Grid column -->
-      <!-- Grid column -->
-      <div class="col-md-5 col-lg-4 ml-lg-0">
-        <!-- Social buttons -->
-        <div class="text-center text-md-right">
-          <ul class="list-unstyled list-inline">
-            <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
-                <i class="fab fa-vk"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                <i class="fab fa-google-plus-g"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
+            <hr class="w-100 clearfix d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Полезные ссылки</h6>
+                <p>
+                    <a href="#!">Помощь приютам г.Новокузнецка</a>
+                </p>
+                <p>
+                    <a href="https://vk.com/nvkzcotpes">НГОО ОЗБЖ "Кот и Пес", г. Новокузнецк</a>
+                </p>
+                <p>
+                    <a href="https://vk.com/club156658408">Приют "Шанс на жизнь"</a>
+                </p>
+            </div>
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Контакты</h6>
+                <p>
+                    <i class="fas fa-home mr-3"></i> Новокузнецк, Кемеровская область - Кузбасс, 654084, Россия</p>
+                <p>
+                    <i class="fas fa-envelope mr-3"></i> mercyboxx@gmail.com</p>
+                <p>
+                    <i class="fas fa-phone mr-3"></i> + 7 908 942 56 17</p>
+            </div>
+            <!-- Grid column -->
         </div>
-      </div>
-      <!-- Grid column -->
+        <!-- Footer links -->
+        <hr>
+        <!-- Grid row -->
+        <div class="row d-flex align-items-center">
+            <!-- Grid column -->
+            <div class="col-md-7 col-lg-8">
+                <!--Copyright-->
+                <p class="text-center text-md-left">© 2023 Copyright:
+                    <a>
+                        <strong> СибГИУ</strong>
+                    </a>
+                </p>
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+                <!-- Social buttons -->
+                <div class="text-center text-md-right">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
+                                <i class="fab fa-vk"></i>
+
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                <i class="fab fa-google-plus-g"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
     </div>
-    <!-- Grid row -->
-  </div>
-  <!-- Footer Links -->
+    <!-- Footer Links -->
 </footer>
 <!-- Подвал -->
-
-
+</div>
+>
+</div>
 </body>
 </html>

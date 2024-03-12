@@ -1,11 +1,4 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
-from .forms import BbForm
-
-# Create your views here.
-from django.http import HttpResponse
-from django.template import loader
 from .models import Bb
 from .models import Rubric
 from django.urls import reverse_lazy
@@ -16,7 +9,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.views.generic.detail import DetailView
 
 
 def index(request):
