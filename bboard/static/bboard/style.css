@@ -46,7 +46,10 @@ ul.btn-group a {
     color: #198754;
 }
 ul.btn-group a:hover {
-    color: #ffffff;
+    text-decoration: none;
+}
+li.nav-item a:hover{
+    color: #198754;
     text-decoration: none;
 }
 ul.header-navbar {
@@ -60,6 +63,8 @@ ul.header-navbar a {
     text-decoration: none;
     color: inherit;
 }
+
+
 
 /* ========================================General rules======================================== */
 
@@ -87,3 +92,16 @@ ul.header-navbar a {
     border-style: none;
     height: 485px;
 }
+.wrapper-create {
+
+}
+.create-add-title {
+    margin-bottom:35px;
+}
+.button-create {
+    margin-top: 35px;
+}
+#bottom_info {
+    margin-top: 50px;
+}
+
