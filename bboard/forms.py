@@ -7,7 +7,7 @@ from django.core.validators import RegexValidator
 
 
 
-from .models import Bb
+from .models import Bb, Profile
 
 
 class BbForm(ModelForm):
@@ -28,3 +28,11 @@ class MyForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+class MyUserForm(UserCreationForm):
+    def save(self, commit = True):
+        user = super(MyUserForm, self).save()
+        if commit:
+            user.save()
+            Profile.objects.create(user=user)
+        return user

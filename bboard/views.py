@@ -1,14 +1,16 @@
-from django.shortcuts import render
-from .models import Bb
+from django.shortcuts import render, get_object_or_404
+from .models import Bb, Profile, User
 from .models import Rubric
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .forms import BbForm
+from .forms import BbForm, MyUserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
 
 def index(request):
@@ -23,7 +25,8 @@ def by_rubric(request, rubric_id):
     rubrics = Rubric.objects.all()
     current_rubric = Rubric.objects.get(pk=rubric_id)
     context = {'bbs': bbs, 'rubrics': rubrics, 'current_rubric': current_rubric}
-    return render(request, 'bboard/by_rubric.html', context)
+    #return render(request, 'bboard/by_rubric.html', context)
+    return render(request, 'bboard/index.html', context)
 
 
 # def by_search(request, search_str):
@@ -55,7 +58,7 @@ class BbCreateView(CreateView):
 class MyRegisterFormView(FormView):
     # Указажем какую форму мы будем использовать для регистрации наших пользователей, в нашем случае
     # это UserCreationForm - стандартный класс Django унаследованный
-    form_class = UserCreationForm
+    form_class = MyUserForm
 
     # Ссылка, на которую будет перенаправляться пользователь в случае успешной регистрации.
     # В данном случае указана ссылка на страницу входа для зарегистрированных пользователей.
@@ -66,6 +69,10 @@ class MyRegisterFormView(FormView):
 
     def form_valid(self, form):
         form.save()
+        # user = form.save()
+        # new_profile = Profile()
+        # new_profile.user = user
+        # new_profile.save()
         # Функция super( тип [ , объект или тип ] )
         # Возвратите объект прокси, который делегирует вызовы метода родительскому или родственному классу типа .
         return super(MyRegisterFormView, self).form_valid(form)
@@ -92,6 +99,35 @@ class LoginFormView(FormView):
         return super(LoginFormView, self).form_valid(form)
 
 
-@login_required
-def profile(request):
-    return render(request, 'bboard/profile.html')
+# @login_required
+# def profile(request):
+#    return render(request, 'bboard/profile.html')
+
+class ShowProfilePageView(DetailView):
+    model = Profile
+    template_name = 'bboard/user_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        users = Profile.objects.all()
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])  # ????
+        context['page_user'] = page_user
+        return context
+
+
+class CreateProfilePageView(CreateView):
+    model = Profile
+
+    template_name = 'bboard/create_profile.html'
+    fields = ['profile_pic', 'bio']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('index')
+
+def bb_detail(request, pk):
+    bb = Bb.objects.get(pk = pk)
+    context = {'bb': bb, }
+    return render(request, 'bboard/item_profile.html', context)

@@ -33,51 +33,49 @@
             <div class="header-top">
                 <div class="container-xxl">
                     <div class="row">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xxl-2">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 col-xxl-2">
                             <div class="container-fluid">
                                 <a href="{% url 'index' %}" class="navbar-brad">
                                     <img src="{% static 'bboard/logo.svg' %}"></a>
                             </div>
                         </div>
-                        <div class="col-xs-4 col-sm-6 col-md-6 col-lg-4 col-xxl-4">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xxl-4">
                             <ul class="header-navbar d-flex justify-content-end">
                                 <li class="nav-item"><a href="{% url 'index' %}"> Главная </a></li>
                                 <li class="nav-item"><a href="#"> Ищут дом </a></li>
                                 <li class="nav-item"><a href="#"> О нас </a></li>
                             </ul>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-12 col-lg-6 col-xxl-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xxl-6">
                             <div class="d-flex justify-content-center">
                                 <ul class="btn-group">
                                     {% if not user.is_authenticated %}
-                                    <li class="nav-item">
-                                        <a href="{% url 'register' %}" class="nav-link"> Зарегистрироваться </a>
+                                    <li>
+                                        <a href="{% url 'register' %}" class="nav-link reg-btn"> Зарегистрироваться </a>
                                     </li>
-                                    <li class="btn-group-login">
-                                        <button type="button" class="btn btn-outline-success btn-sm"><a
-                                                href="{% url 'login' %}" class="nav-link"><i
-                                                class="fa-solid fa-right-to-bracket"></i> Войти </a></button>
+                                    <li>
+                                        <a href="{% url 'login' %}" class="nav-link login-btn"><i
+                                                class="fa-solid fa-right-to-bracket"></i> Войти </a>
                                     </li>
                                     {% endif %}
                                     {% if user.is_authenticated %}
-                                    <li class="nav-item"><a href="{% url 'users-profile' %}" class="nav-link">Личный
-                                        кабинет </a></li>
-                                    <li>
-                                        <button type="button" class="btn btn-outline-success btn-sm"><a
-                                                href="{% url 'add' %}" class="nav-link">Разместить объявление</a>
+                                    <div class="lk-btn-group">
+                                        <button type="button" class="nav-link lk-btn"><a
+                                                href="{% url 'profile' pk=user.pk %}">Личный Кабинет</a></button>
+                                        <button type="button"
+                                                class="dropdown-toggle dropdown-toggle-split lk-btn-drop"
+                                                data-bs-toggle="dropdown" aria-expanded="false ">
+                                            <span class="visually-hidden">Переключатель выпадающего списка</span>
                                         </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{% url 'exit'%}"> Выйти из аккаунта </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <li><a href="{% url 'add' %}" class="nav-link add-item-btn">Разместить
+                                        объявление</a>
                                     </li>
-
                                     {% endif %}
-                                     {% if user.is_authenticated %}
-                                    <li>
-
-                                        <p>Вы авторизованы как: {{ user.username }}</p>
-                                        <!--  Ссылка на страницу кабинета  -->
-                                        <a href="{% url 'exit'%}"> выйти из аккаунта </a>
-
-                                    </li>
-                                     {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -88,80 +86,8 @@
         </header>
     </div>
 </section>
-<!-- Баннер -->
-
-<section id="main_banner">
-    <div class="container-xxl">
-        <div class="d-none d-sm-block">
-        <div class="col-lg-12 d-lg-flex justify-content-center">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{% static 'bboard/Main_Banner.png' %}" class="d-block " alt="...">
-                    </div>
-                    <div class="carousel-item ">
-                        <img src="{% static 'bboard/banner2.png' %}" class="d-block " alt="...">
-                    </div>
-                    <div class="carousel-item ">
-                        <img src="{% static 'bboard/banner3.png' %}" class="d-block " alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-</section>
-
-
-<!-- Блок категорий-->
-<section id="main_info">
-    <div class="container-xxl">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
-                <div class="container-fluid" style="background-color:#FBFBFB">
-                    <h3 class="rubric_title"> Категории </h3>
-                    <ul class="list-group list-group-flush">
-                        {% for rubric in rubrics %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center"
-                            style="background-color:#FBFBFB">
-                            <a href="{% url 'by_rubric' rubric.pk %}"
-                               style="text-decoration: none; color: #3D3D3D;">{{ rubric.name }}</a>
-                            <span class="badge bg-success rounded-pill">{{rubric.get_count}} </span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-10">
-                <div class="row">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
+{% block main %}
+{% endblock %}
 <!-- Подвал -->
 <section id="bottom_info">
     <footer class="page-footer font-small mdb-color pt-4">
@@ -188,7 +114,8 @@
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold">Полезные ссылки</h6>
                         <p>
-                            <a href="#!">Помощь приютам г.Новокузнецка</a>
+                            <a href="https://pet-portal.ru/shelter/stype-charitable-foundation/">Помощь приютам
+                                г.Новокузнецка</a>
                         </p>
                         <p>
                             <a href="https://vk.com/nvkzcotpes">НГОО ОЗБЖ "Кот и Пес", г. Новокузнецк</a>
@@ -254,7 +181,7 @@
                                 </li>
                             </ul>
                         </div>
-                        ляя
+
                     </div>
                     <!-- Grid column -->
                 </div>

@@ -1,89 +1,6 @@
+{%  extends "layout/basic.html" %}
 {% load static %}
-<html>
-<head>
-    <meta lang="ru" charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'bboard/style.css' %}">
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-    <title>{% block title %}Главная{% endblock %} - Доска объявлений</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-</head>
-<body>
-
-<!-- Панель навигации -->
-<div class="wrapper">
-    <header class="header">
-        <div class="header-top">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="container-fluid">
-                            <a href="{% url 'index' %}" class="navbar-brad"><img
-                                    src="{% static 'bboard/logo.svg' %}"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="header-navbar d-flex justify-content-end">
-                            <li class="nav-item"><a href="{% url 'index' %}"> Главная </a></li>
-                            <li class="nav-item"><a href="#"> Ищут дом </a></li>
-                            <li class="nav-item"><a href="#"> О нас </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="d-flex justify-content-end">
-                            <ul class="btn-group">
-                                {% if not user.is_authenticated %}
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-outline-success btn-sm"><a
-                                            href="{% url 'register' %}" class="nav-link"> Зарегистрироваться </a>
-                                    </button>
-                                </li>
-                                <li class="btn-group-login">
-                                    <button type="button" class="btn btn-outline-success btn-sm"><a
-                                            href="{% url 'login' %}" class="nav-link"><i
-                                            class="fa-solid fa-right-to-bracket"></i> Войти</a></button>
-                                </li>
-                                {% endif %}
-                                {% if user.is_authenticated %}
-                                <li class="nav-item active"><a href="{% url 'users-profile' %}" class="nav-link">Личный
-                                    кабинет </a></li>
-                                <li class="btn-group-add">
-                                    <button type="button" class="btn btn-outline-success btn-sm"><a
-                                            href="{% url 'add' %}" class="nav-link">Разместить объявление</a></button>
-                                </li>
-                                {% endif %}
-                            </ul>
-                            <ul class="adf">
-                                {% if user.is_authenticated %}
-                                <p>Вы авторизованы как: {{ user.username }}</p>
-                                <!--  Ссылка на страницу кабинета  -->
-                                <a href="{% url 'exit'%}"> выйти из аккаунта </a>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    {% block content %}
+{% block main %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -97,7 +14,7 @@
                 <div class="row"><span class="create-title">Название </span> {{ form.title }}</div>
                 <div class="row"><span class="create-title">Введите текста объявления: <br> </span> {{ form.content }}
                 </div>
-                <div class="row"><span class="create-title">Цена </span> {{ form.price }}</div>
+                <!-- <div class="row"><span class="create-title">Цена </span> {{ form.price }}</div> -->
                 <div class="row"><span class="create-title">Контактная информация </span> {{ form.phone }}</div>
                 <div class="row"><span class="create-title">Изображение </span> {{ form.image }}</div>
 
@@ -112,60 +29,3 @@
 </form>
 
 {% endblock %}
-
-
-<!-- Подвал -->
-<footer class="page-footer font-small mdb-color pt-4">
-    <div class="sticky-bottom">
-        <div class="container text-center text-md-left">
-            <hr>
-            <!-- Grid row -->
-            <div class="row d-flex align-items-center">
-                <!-- Grid column -->
-                <div class="col-md-7 col-lg-8">
-                    <!--Copyright-->
-                    <p class="text-center text-md-left">© 2024 Copyright:
-                        <a>
-                            <strong> СибГИУ</strong>
-                        </a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-                <div class="col-md-5 col-lg-4 ml-lg-0">
-                    <!-- Social buttons -->
-                    <div class="text-center text-md-right">
-                        <ul class="list-unstyled list-inline">
-                            <li class="list-inline-item">
-                                <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
-                                    <i class="fab fa-vk"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn-floating btn-sm rgba-white-slight mx-1" href="##">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                                    <i class="fab fa-google-plus-g"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-        </div>
-    </div>
-    <!-- Footer Links -->
-</footer>
-<!-- Подвал -->
-
-</body>
-</html>

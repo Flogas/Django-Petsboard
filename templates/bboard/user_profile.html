@@ -1,0 +1,26 @@
+{%  extends "layout/basic.html" %}
+{% load static %}
+{% block main %}
+
+    <div class="header-bar">
+        <h1>Profile</h1>
+
+        <a href="{% url 'index' %}">&#8592; Back</a>
+
+    </div>
+
+    <div class="card-body">
+    {% if user.profile.profile_pic %}
+      <img src="{{ profile.profile_pic.url }}" height=100 width=100><br><br>
+    {% else %}
+      <img src="{% static 'bboard/default.png' %}" height=100 width=100><br><br>
+    {% endif %}
+      <p><strong>Username:</strong> {{ page_user.user.username }}</p><br><br>
+      <p><strong>Bio:</strong> {{ profile.bio }}</p><br><br>
+
+
+
+    </div>
+
+{% endblock %}
+
