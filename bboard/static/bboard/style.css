@@ -211,3 +211,11 @@ ul.header-navbar a {
 .lk-btn:hover > a {
   color: #198754;
 }
+.user-card-body {
+    padding-top: 5%;
+}
+.user-card-body img{
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}

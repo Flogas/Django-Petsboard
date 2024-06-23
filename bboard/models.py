@@ -46,6 +46,8 @@ class Rubric(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    # name = models.TextField(null=True, blank=True)
+    # surname = models.TextField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile_images/")
 

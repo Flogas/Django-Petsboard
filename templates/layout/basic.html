@@ -68,6 +68,9 @@
                                             <span class="visually-hidden">Переключатель выпадающего списка</span>
                                         </button>
                                         <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{% url 'profile' pk=user.pk %}"> Мои объявления </a>
+                                            </li>
+                                            <hr>
                                             <li><a class="dropdown-item" href="{% url 'exit'%}"> Выйти из аккаунта </a>
                                             </li>
                                         </ul>
@@ -90,7 +93,7 @@
 {% endblock %}
 <!-- Подвал -->
 <section id="bottom_info">
-    <footer class="page-footer font-small mdb-color pt-4">
+    <footer class="page-footer font-small mdb-color pt-4 mt-auto position-sticky top-100">
         <div class="container-xxl">
             <div class="container text-center text-md-left">
                 <!-- Footer links -->

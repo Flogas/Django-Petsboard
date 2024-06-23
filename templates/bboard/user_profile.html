@@ -1,26 +1,51 @@
 {%  extends "layout/basic.html" %}
 {% load static %}
 {% block main %}
-
+<div class="container">
     <div class="header-bar">
-        <h1>Profile</h1>
-
-        <a href="{% url 'index' %}">&#8592; Back</a>
-
+        <h1>Профиль</h1>
+        <!--        <a href="{% url 'index' %}">&#8592; Back</a>-->
     </div>
-
-    <div class="card-body">
-    {% if user.profile.profile_pic %}
-      <img src="{{ profile.profile_pic.url }}" height=100 width=100><br><br>
-    {% else %}
-      <img src="{% static 'bboard/default.png' %}" height=100 width=100><br><br>
-    {% endif %}
-      <p><strong>Username:</strong> {{ page_user.user.username }}</p><br><br>
-      <p><strong>Bio:</strong> {{ profile.bio }}</p><br><br>
-
-
-
-    </div>
-
-{% endblock %}
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xxl-2">
+            <div class="user-card-body">
+                {% if user.profile.profile_pic %}
+                <img src="{{ profile.profile_pic.url }}"><br><br>
+                {% else %}
+                <img src="{% static 'bboard/default.png' %}"<br><br>
+                {% endif %}
+                <h2><strong>{{user.profile.user}}</strong></h2>
+            </div>
+            <hr>
+            <h6><strong><a href="#">Мои объявления</a></strong></h6>
+            <h6><strong><a href="#">Мои отзывы</a></strong></h6>
+            <h6><strong><a href="#">Избранное</a></strong></h6>
+            <hr>
+            <h6><strong><a href="#">Сообщения</a></strong></h6>
+            <h6><strong><a href="#">Уведомления</a></strong></h6>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xxl-10">
+            <div class="user-card-discription">
+                <h3><strong>Мои объявления</strong></h3>
+                {% for bb in bbs %}
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="card" style="width: 22rem;">
+                        <div class="card-body">
+                            <img src="{{ bb.image.url}}" class="card-img-top" style="width:19rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ bb.title }}</h5>
+                                <h4>{{ bb.content.name }}</h4>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Автор объявления: {{bb.owner_user.username}}</li>
+                                <li class="list-group-item">Контактный номер: {{ bb.phone }}</li>
+                                <li class="list-group-item">Дата публикации: {{ bb.published|date:"d.m.Y" }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endblock %}
 
