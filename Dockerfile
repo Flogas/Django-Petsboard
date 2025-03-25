@@ -1,14 +1,14 @@
-FROM docker.io/paritytech/ci-linux:production as builder
+FROM python:3.4
+
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		mysql-client \
+	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /Django-Petsboard
-COPY ./Django-Petsboard
-
-RUN cargo build --locked --release
-
-FROM docker.io/library/ubuntu:20.04
-
+COPY requirements.txt ./
 RUN pip install -r requirements.txt
+COPY . .
 
-RUN ls -a
-
-CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000", "--settings=mysite.settings.prod" ]
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
