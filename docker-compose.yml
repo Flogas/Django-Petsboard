@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7  # Используем официальный образ MySQL
+    container_name: django-petsboard-db  # Имя контейнера базы данных
+    environment:
+      MYSQL_ROOT_PASSWORD: password  # Пароль root пользователя
+      MYSQL_DATABASE: my_database  # Имя базы данных
+      MYSQL_USER: user  # Имя пользователя
+      MYSQL_PASSWORD: password  # Пароль пользователя
+    ports:
+      - "3307:3306"  # Пробрасываем порт 3306
+    volumes:
+      - db_data:/var/lib/mysql  # Для хранения данных базы данных
+    networks:
+      - django-petsboard-network  # Указываем сеть для взаимодействия контейнеров
+
+  web:
+    build: .  # Директория с Dockerfile для Django
+    container_name: django-petsboard-web  # Имя контейнера Django
+    command: /bin/bash -c "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"  # Задержка перед запуском Django
+    volumes:
+      - .:/app  # Монтируем текущую директорию в контейнер
+    ports:
+      - "8000:8000"  # Пробрасываем порт 8000 для доступа к Django
+    depends_on:
+      - db  # Указываем зависимость от контейнера db
+    networks:
+      - django-petsboard-network  # Используем ту же сеть для контейнеров
+
+networks:
+  django-petsboard-network:  # Сеть для общения контейнеров
+    driver: bridge
+
+volumes:
+  db_data:  # Тома для хранения данных базы данных
