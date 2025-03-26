@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:5.7  # Используем официальный образ MySQL
+    image: mysql:8.0  # Используем официальный образ MySQL
     container_name: django-petsboard-db  # Имя контейнера базы данных
     environment:
       MYSQL_ROOT_PASSWORD: password  # Пароль root пользователя
