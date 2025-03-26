@@ -97,7 +97,7 @@ DATABASES = {"default":
                   "NAME": "sibsiu_pets_board",
                   "USER": "root",
                   "PASSWORD": "root",
-                  "HOST": "localhost",
+                  "HOST": "db",
                   "PORT": "3306", }
              }
 
