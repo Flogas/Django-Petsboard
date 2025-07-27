@@ -1,4 +1,4 @@
-{%  extends "layout/basic.html" %}
+{%  extends "layout/basic_with_rubric.html" %}
 {% block content %}
 {% for bb in bbs %}
 <!--<div class="container-fluid">
@@ -25,12 +25,14 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Автор объявления: {{bb.owner_user.username}}</li>
                 <li class="list-group-item">Контактный номер: {{ bb.phone }}</li>
-                <li class="list-group-item">Дата публикации: {{ bb.published|date:"d.m.Y H:i" }}</li>
+                <li class="list-group-item">Дата публикации: {{ bb.published|date:"d.m.Y" }}</li>
             </ul>
-            <!--<div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>-->
+            <div class="card-details">
+                <a href="{% url 'bb_detail' bb.pk %}" class="card-link">Подробнее</a>
+           <!-- <button type="button" class="btn btn-outline-success btn-sm btn-custom">
+
+            </button>-->
+            </div>
         </div>
     </div>
 </div>

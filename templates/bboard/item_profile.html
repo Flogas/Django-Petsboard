@@ -1,0 +1,46 @@
+{%  extends "layout/basic.html" %}
+{% load static %}
+{% block main %}
+<div class="container">
+    <div class="header-bar">
+        <h1>Объявление</h1>
+        <a href="{% url 'index' %}">&#8592; Back</a>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xxl-6">
+            <div class="item-card-body">
+                <img src="{{ bb.image.url }}" class="img-fluid" alt="Responsive image"><br><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xxl-6">
+            <div class="row">
+                <div class="col-12">
+                    <h1> {{ bb.title }} </h1>
+                </div>
+                <hr>
+                {% if bb.content != "" %}
+                <div class="col-12">
+                    <p><strong>Краткое описание:</strong><br> {{ bb.content }}</p>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Телефон для связи:</strong><br>{{ bb.phone }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Категория</h4>
+                        <p>{{ bb.rubric }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Дата размещения:</strong><br>{{ bb.published|date:"d.m.Y" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}

@@ -45,10 +45,12 @@ class Rubric(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    # name = models.TextField(null=True, blank=True)
+    # surname = models.TextField(null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile_images/")
 
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
-    bio = models.TextField()
 
-    def __str__(self):
-        return self.user.username
+def __str__(self):
+    return f'{self.user.username} Profile'

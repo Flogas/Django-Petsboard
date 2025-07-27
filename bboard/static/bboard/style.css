@@ -19,6 +19,10 @@ main.main {
     flex: 1 1 auto;
 }
 
+a{
+text-decoration:none;
+}
+
 /* ========================================Header rules======================================== */
 .container-header {
     display: flex;
@@ -37,14 +41,12 @@ ul.btn-group{
     list-style:none;
 
 }
-ul.btn-group li{
+
+ul.btn-group > li{
     margin-right:40px;
     padding-bottom:20px;
 }
-ul.btn-group a {
-    text-decoration: none;
-    color: #198754;
-}
+
 ul.btn-group a:hover {
     text-decoration: none;
 }
@@ -92,9 +94,7 @@ ul.header-navbar a {
     border-style: none;
     height: 485px;
 }
-.wrapper-create {
 
-}
 .create-add-title {
     margin-bottom:35px;
 }
@@ -104,4 +104,118 @@ ul.header-navbar a {
 #bottom_info {
     margin-top: 50px;
 }
+.card-link {
+  text-decoration: none;
+  font-size:14px;
+  color: #198754;
+  border: 2px solid #198754;
+  border-radius: 8px;
+  padding:10px;
+  transition:0.1s;
+}
 
+.card-details{
+  padding-top: 15px;
+  text-align: center;
+}
+.btn-custom:hover{
+  color: #fff;
+  text-decoration: none;
+}
+.card-link:hover {
+  color: #fff;
+  background-color:#198754;
+  text-decoration: none;
+}
+.add-item-btn {
+  text-decoration: none;
+  text-align:center;
+  color: #198754;
+  border: 2px solid #198754;
+  border-radius: 8px;
+  padding:10px;
+  transition:0.1s;
+}
+.add-item-btn:hover {
+  color: #fff;
+  background-color:#198754;
+  text-decoration: none;
+ }
+.login-btn {
+  text-decoration: none;
+  text-align:center;
+  color: #198754;
+  border: 2px solid #198754;
+  border-radius: 8px;
+  padding:10px;
+  transition:0.1s;
+  padding:15px 30px 15px 30px;
+}
+
+.login-btn:hover {
+  color: #fff;
+  background-color:#198754;
+  text-decoration: none;
+}
+
+.reg-btn {
+  text-decoration: none;
+  text-align:center;
+  color: white;
+  background-color: #198754;
+  border: 2px solid #198754;
+  border-radius: 8px;
+  padding:10px;
+  transition:0.1s;
+  padding:15px 30px 15px 30px;
+}
+
+.reg-btn:hover {
+  color:#198754;
+  background-color:#fff ;
+  text-decoration: none;
+}
+
+.lk-btn{
+  text-decoration: none;
+  text-align:center;
+  color: #fff;
+  border: 2px solid #198754;
+  background-color:#198754;
+  border-radius: 8px 0 0 8px;
+  transition:0.1s;
+}
+.lk-btn:hover {
+  color: #198754;
+  background-color:#fff;
+  text-decoration: none;
+ }
+ .lk-btn-drop{
+  text-decoration: none;
+  text-align:center;
+  color: #fff;
+  border: 2px solid #198754;
+  background-color:#198754;
+  border-radius: 0 8px 8px 0;
+  transition:0.1s;
+  margin-right:20px;
+ }
+ .lk-btn-group{
+  display: flex;
+  flex-direction: row;
+  height:48px;
+ }
+.lk-btn a {
+  color: #fff;
+}
+.lk-btn:hover > a {
+  color: #198754;
+}
+.user-card-body {
+    padding-top: 5%;
+}
+.user-card-body img{
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}

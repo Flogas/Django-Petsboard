@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% block content %}
+    {% if request.user.is_authenticated %}
+        <div class="header-bar">
+            <a href="{% url 'index' %}">&#8592; Back</a>
+        </div>
+    <div class="card-body">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+           <input class="button" type="submit" value="Submit">
+        </form>
+    </div>
+{% else %}
+    <a href="{% url 'login' %}">Login </a>
+{% endif %}
+
+{% endblock content %}
+</body>
+</html>
